@@ -1,33 +1,37 @@
+import { useEffect, useState } from "react";
 import React from 'react';
 
-const Button = ({onClick , children}) => {
-
-  return(
-        <button onClick={ e =>{
-         e.stopPropagation();
-         onClick();  } }> 
-        {children}
-        </button>
-  )
-}
 
 export default function FirstComponent() {
  
-    return (
-      <div className='Toolbar' onClick={()=>{
-        alert("hi")
-      }} >
-      <Button onClick = {()=>{
-          alert('hockey')
-      }}>
-          Play Hockey
-      </Button>
-      <Button onClick = {()=>{
-          alert('football')
-      }}>
-          Play football
-      </Button>
+  const [counter, setCounter] = useState(0);
+  const [counter2, setCounter2] = useState(0);
 
-      </div>
+  function handleClick() {
+    setCounter(counter+1);
+  }
+
+  function handleClick1() {
+    setCounter2(counter2+1);
+  }
+
+
+  useEffect(()=>{
+    console.log("inside useeffect")
+
+
+    return ()=>{
+          // for time out etc
+    }
+  }, [counter])
+
+
+    return (
+      <>
+        <button onClick={handleClick}>Click me1!</button>
+        <h1>{counter}</h1>
+        <button onClick={handleClick1}>Click me2!</button>
+        <h1>{counter2}</h1>
+        </>
     );
   }
